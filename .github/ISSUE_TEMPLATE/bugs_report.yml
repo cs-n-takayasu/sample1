@@ -13,8 +13,8 @@ body:
       label: 関連discussion
       description: 関連discussionのURLを入力してください。
       placeholder: ex. URL
-    validations:
-      required: true
+      validations:
+        required: true
   - type: textarea
     id: function-description
     attributes:
