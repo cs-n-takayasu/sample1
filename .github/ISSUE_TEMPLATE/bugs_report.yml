@@ -1,0 +1,31 @@
+name: 機能開発
+description: 機能追加、機能作成の際に使用するテンプレート
+title: "タイトル"
+labels: ["Eextract", "Transform", "Load", "DWH", "DataMart"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: discussionURL
+    attributes:
+      label: 関連discussion
+      description: 関連discussionのURLを入力してください。
+      placeholder: ex. URL
+  - type: textarea
+    id: function-description
+    attributes:
+      label: 機能開発方針及び設計
+      description: 機能開発の方針及び設計について記載してください。
+      placeholder: 機能開発の方針及び設計について記載してください。
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: チェックリスト
+      description: 機能開発完了条件
+      options:
+        - label: 関連リンクURLを記載
+          required: true
+        - label: 機能概要記載
+          required: true
