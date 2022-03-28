@@ -13,16 +13,12 @@ body:
       label: 関連discussion
       description: 関連discussionのURLを入力してください。
       placeholder: ex. URL
-      validations:
-        required: true
   - type: textarea
     id: function-description
     attributes:
       label: 機能開発方針及び設計
       description: 機能開発の方針及び設計について記載してください。
       placeholder: 機能開発の方針及び設計について記載してください。
-      validations:
-        required: true
   - type: checkboxes
     id: checklist
     attributes:
