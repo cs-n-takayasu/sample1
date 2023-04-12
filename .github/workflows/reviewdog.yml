@@ -1,0 +1,36 @@
+name: Reviewdog
+on: [pull_request]
+permissions:
+  pull-requests: write
+
+jobs:
+  python_check:
+    strategy:
+      matrix:
+        workdir:
+          - .
+    name: python_check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+
+      - uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      - run: pip install black==23.1.0
+      - run: pip install poetry==1.4.0
+      - run: poetry install
+
+      - name: black
+        uses: reviewdog/action-black@v3
+        with:
+          black_args: "--config ./pyproject.toml"
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          fail_on_error: true
+          filter_mode: nofilter
+          workdir: ${{ matrix.workdir }}
