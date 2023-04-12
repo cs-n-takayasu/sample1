@@ -27,6 +27,10 @@ jobs:
           pip install black==23.1.0 bandit==1.7.5 poetry==1.4.0
           poetry install
       
+      - name: Security Check by bandit
+        run: |
+          bandit -r . | reviewdog -efm="%f:%l:%c: %m" -reporter=github-pr-review
+
       - name: black
         uses: reviewdog/action-black@v3
         with:
@@ -37,6 +41,3 @@ jobs:
           filter_mode: nofilter
           workdir: ${{ matrix.workdir }}
 
-      - name: Security Check by bandit
-        run: |
-          bandit -r . | reviewdog -efm="%f:%l:%c: %m" -reporter=github-pr-review
