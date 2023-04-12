@@ -34,7 +34,7 @@ jobs:
           
       - name: POetry Install
         run: |    
-          poetry plugin self add poetry-audit-plugin
+          poetry self add poetry-audit-plugin
           poetry install
       
       # - name: Security Check by bandit
