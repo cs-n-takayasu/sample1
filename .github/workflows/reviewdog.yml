@@ -17,10 +17,15 @@ jobs:
         with:
           python-version: "3.8"
 
-      - name: Setup Reviewdog
+      - name: Setup Reviewdog with action
         uses: reviewdog/action-setup@v1
         with:
           reviewdog_version: latest
+
+      - name: Setup reviewdog on Github Action
+        run: |
+          mkdir -p $HOME/bin && curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s -- -b $HOME/bin
+          echo ::add-path::$HOME/bin
 
       - name: Install Libraries
         run: |
