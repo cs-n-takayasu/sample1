@@ -1,7 +1,7 @@
 import yaml
 
 
-class Sample():
+class Sample:
     def __init__(self, password: str, data_path: str):
         self.password = password
         assert isinstane(password, int)
@@ -10,5 +10,5 @@ class Sample():
             self.is_admin = True
         else:
             self.is_admin = False
-        
+
         self.data = yaml.load(data_path)
