@@ -17,18 +17,16 @@ jobs:
         with:
           python-version: "3.8"
 
-      - uses: reviewdog/action-setup@v1
+      - name: Setup Reviewdog
+        uses: reviewdog/action-setup@v1
         with:
           reviewdog_version: latest
 
-      - run: pip install black==23.1.0
-      - run: pip install bandit==1.7.5
-      - run: pip install poetry==1.4.0
-      - run: poetry install
+      - name: Install Libraries
+        run: |
+          pip install black==23.1.0 bandit==1.7.5 poetry==1.4.0
+          poetry install
       
-      - name: bandit
-        run: bandit -r .
-
       - name: black
         uses: reviewdog/action-black@v3
         with:
@@ -38,3 +36,7 @@ jobs:
           fail_on_error: true
           filter_mode: nofilter
           workdir: ${{ matrix.workdir }}
+
+      - name: Security Check by bandit
+        run: |
+          bandit -r . | reviewdog -efm="%f:%l:%c: %m" -reporter=github-pr-review
