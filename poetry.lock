@@ -480,7 +480,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ba690e9ffb062a7f6007019dcb64a3c9ef8c934d6be3358999910636e5ea99c3"
+content-hash = "ce6c2e6c9e46cfba289b187a5a14808d9878163c867a255db06d17d6e813935a"
 
 [metadata.files]
 bandit = []

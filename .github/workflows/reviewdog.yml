@@ -25,6 +25,9 @@ jobs:
       - run: pip install bandit==1.7.5
       - run: pip install poetry==1.4.0
       - run: poetry install
+      
+      - name: bandit
+        run: bandit -r .
 
       - name: black
         uses: reviewdog/action-black@v3
@@ -35,6 +38,3 @@ jobs:
           fail_on_error: true
           filter_mode: nofilter
           workdir: ${{ matrix.workdir }}
-      
-      - name: bandit
-        run: bandit -r .
