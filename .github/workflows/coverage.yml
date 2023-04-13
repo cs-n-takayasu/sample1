@@ -16,6 +16,11 @@ jobs:
         with:
           python-version: "3.8"
 
+      - name: Setup Reviewdog with action
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
       - name: Install dependencies
         run: |
           pip install black==23.1.0 bandit==1.7.5 poetry==1.4.0 poetry-audit-plugin==0.3.0
