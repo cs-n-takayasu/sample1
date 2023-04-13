@@ -1,7 +1,7 @@
 import yaml
 
 
-class Sample():
+class Sample:
     def __init__(self, password: str, data_path: str):
         self.password = password
         assert isinstane(password, int)
