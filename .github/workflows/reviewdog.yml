@@ -63,15 +63,13 @@ jobs:
           poetry run pytest tests -v --cov=src/ --cov-fail-under=80
           reviewdog -efm="%f:%l: %m" -reporter=github-pr-review
 
-
-
-      # - name: black
-      #   uses: reviewdog/action-black@v3
-      #   with:
-      #     black_args: "--config ./pyproject.toml"
-      #     github_token: ${{ secrets.github_token }}
-      #     reporter: github-pr-review
-      #     fail_on_error: true
-      #     filter_mode: nofilter
-      #     workdir: ${{ matrix.workdir }}
+      - name: black
+        uses: reviewdog/action-black@v3
+        with:
+          black_args: "--config ./pyproject.toml"
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          fail_on_error: true
+          filter_mode: nofilter
+          workdir: ${{ matrix.workdir }}
 
