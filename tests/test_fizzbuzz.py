@@ -4,7 +4,12 @@ from src.fizzbuzz import fizzbuzz
 
 @pytest.mark.parametrize(
     "num, result",
-    [(15, "FizzBuzz")],
+    [
+        (15, "FizzBuzz"),
+        (3, "Fizz"),
+        (5, "Buzz"),
+        (1, "1"),
+    ],
 )
 def test_fizzbuzz(num, result):
     """
