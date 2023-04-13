@@ -20,6 +20,10 @@ jobs:
         run: |
           pip install black==23.1.0 bandit==1.7.5 poetry==1.4.0 poetry-audit-plugin==0.3.0
 
+      - name: Poetry Install
+        run: |    
+          poetry self add poetry-audit-plugin
+          poetry install
       # - name: Install dependencies
       #   run: |
       #     python -m pip install --upgrade pip
