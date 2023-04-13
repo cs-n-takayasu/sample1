@@ -11,6 +11,8 @@ black = "23.1.0"
 bandit = "^1.7.5"
 pip-audit = "^2.5.4"
 PyYAML = "^6.0"
+pytest = "^7.3.0"
+pytest-cov = "^4.0.0"
 
 
 [build-system]

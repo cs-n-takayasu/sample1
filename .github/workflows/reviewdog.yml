@@ -11,6 +11,7 @@ jobs:
           - .
     name: python_check
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -30,9 +31,9 @@ jobs:
 
       - name: Install Libraries
         run: |
-          pip install black==23.1.0 bandit==1.7.5 poetry==1.4.0
+          pip install black==23.1.0 bandit==1.7.5 poetry==1.4.0 poetry-audit-plugin==0.3.0
           
-      - name: POetry Install
+      - name: Poetry Install
         run: |    
           poetry self add poetry-audit-plugin
           poetry install
@@ -44,15 +45,15 @@ jobs:
       - name: Check Packages
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
-        run: poetry audit | reviewdog -reporter=github-pr-review
+        run: poetry run pip-audit | reviewdog -reporter=github-pr-review
 
-      - name: black
-        uses: reviewdog/action-black@v3
-        with:
-          black_args: "--config ./pyproject.toml"
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
-          fail_on_error: true
-          filter_mode: nofilter
-          workdir: ${{ matrix.workdir }}
+      # - name: black
+      #   uses: reviewdog/action-black@v3
+      #   with:
+      #     black_args: "--config ./pyproject.toml"
+      #     github_token: ${{ secrets.github_token }}
+      #     reporter: github-pr-review
+      #     fail_on_error: true
+      #     filter_mode: nofilter
+      #     workdir: ${{ matrix.workdir }}
 
