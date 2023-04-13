@@ -37,10 +37,6 @@ jobs:
         run: |    
           poetry self add poetry-audit-plugin
           poetry install
-      
-      # - name: Security Check by bandit
-      #   run: |
-      #     bandit -r . | reviewdog -efm="%f:%l:%c: %m" -reporter=github-pr-review
 
       # - name: Check Packages
       #   env:

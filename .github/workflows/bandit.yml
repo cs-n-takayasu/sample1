@@ -1,0 +1,38 @@
+name: Reviewdog
+on: [pull_request]
+permissions:
+  pull-requests: write
+
+jobs:
+  python_check:
+    strategy:
+      matrix:
+        workdir:
+          - .
+    name: bandit_check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+
+      - name: Setup Reviewdog with action
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      - name: Install Libraries
+        run: |
+          pip install black==23.1.0 bandit==1.7.5 poetry==1.4.0 poetry-audit-plugin==0.3.0
+          
+      - name: Poetry Install
+        run: |    
+          poetry self add poetry-audit-plugin
+          poetry install
+      
+      - name: Security Check by bandit
+        run: |
+          bandit -r src/ | reviewdog -efm="%f:%l:%c: %m" -reporter=github-pr-review
