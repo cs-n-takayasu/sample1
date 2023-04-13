@@ -26,7 +26,7 @@ jobs:
 
       - name: Install Libraries
         run: |
-          pip install black==23.1.0 bandit==1.7.5 poetry==1.4.0 poetry-audit-plugin==0.3.0
+          pip install poetry==1.4.0 poetry-audit-plugin==0.3.0
           
       - name: Poetry Install
         run: |    
@@ -37,7 +37,7 @@ jobs:
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
         run: |
-          bandit -r src/ | reviewdog -efm="%f:%l:%c: %m" -reporter=github-pr-review
+          poetry run bandit -r src/ | reviewdog -efm="%f:%l:%c: %m" -reporter=github-pr-review
 
       - name: Security check of packages by pip-audit
         env:
