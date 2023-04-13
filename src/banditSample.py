@@ -1,4 +1,3 @@
-
 # import yaml
 
 
@@ -11,5 +10,5 @@
 #             self.is_admin = True
 #         else:
 #             self.is_admin = False
-        
+
 #         self.data = yaml.load(data_path)
