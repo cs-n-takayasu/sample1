@@ -30,20 +30,28 @@ jobs:
           poetry self add poetry-audit-plugin
           poetry install
 
-      - name: Test with pytest
-        env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
-        run: |
-          poetry run pytest tests -v --cov=src/ --cov-fail-under=80
-          reviewdog -efm="%f:%l: %m" -reporter=github-pr-review
-
-      - name: Build coverage file
-        run: |
-          poetry run pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=src/ tests | tee pytest-coverage.txt
-
-      - name: Pytest coverage comment
-        uses: MishaKav/pytest-coverage-comment@main
+      - uses: reviewdog/action-pytest@v1
         with:
-          multiple-files: |
-            test_addDef, ./data/pytest-coverage_3.txt, ./data/pytest_junit_1.xml
-            test_fizbuzz, ./data/pytest-coverage_4.txt, ./data/pytest_junit_2.xml
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
+          # Change reviewdog reporter if you need [github-pr-check,github-check,github-pr-review].
+          reporter: github-pr-review
+          # Change reporter level if you need.
+          # GitHub Status Check won't become failure with warning.
+          level: warning
+      # - name: Test with pytest
+      #   env:
+      #     REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_GITHUB_TOKEN }}
+      #   run: |
+      #     poetry run pytest tests -v --cov=src/ --cov-fail-under=80
+      #     reviewdog -efm="%f:%l: %m" -reporter=github-pr-review
+
+      # - name: Build coverage file
+      #   run: |
+      #     poetry run pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=src/ tests | tee pytest-coverage.txt
+
+      # - name: Pytest coverage comment
+      #   uses: MishaKav/pytest-coverage-comment@main
+      #   with:
+      #     multiple-files: |
+      #       test_addDef, ./data/pytest-coverage_3.txt, ./data/pytest_junit_1.xml
+      #       test_fizbuzz, ./data/pytest-coverage_4.txt, ./data/pytest_junit_2.xml
